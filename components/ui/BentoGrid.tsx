@@ -1,0 +1,201 @@
+import { useState } from "react";
+import { IoArrowForwardOutline, IoCopyOutline} from "react-icons/io5";
+
+import Lottie from "react-lottie";
+
+import { cn } from "@/lib/utils";
+
+
+import { BackgroundGradientAnimation } from "./GradientBg";
+import GridGlobe from "./GridGlobe";
+import animationData from "@/data/confetti.json";
+import MagicButton from "../MagicButton";
+import { InfiniteTechStack } from "./InfiniteTechStack";
+import { socialMedia } from "@/data";
+
+export const BentoGrid = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 md:grid-row-7 gap-4 lg:gap-8 mx-auto",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const BentoGridItem = ({
+  className,
+  id,
+  title,
+  description,
+  img,
+  imgClassName,
+  titleClassName,
+  spareImg,
+  type,
+}: {
+  className?: string;
+  id: number;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  img?: string;
+  imgClassName?: string;
+  titleClassName?: string;
+  spareImg?: string;
+  type?: string;
+}) => {
+  const leftLists = ["ReactJS", "Express", "Javascript", "Python", "TensorFlow", "Java", "MongoDB", "HTML", "CSS", "Flutter", "C++", "SQL"];
+  const rightLists = leftLists.toReversed();
+
+  const [copied, setCopied] = useState(false);
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: copied,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const handleCopy = () => {
+    const text = "kshitijradotra@gmail.com";
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+  };
+
+  return (
+    <div
+      className={cn(
+        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+        className
+      )}
+      style={{
+        background: "rgb(4,7,29)",
+        backgroundColor:
+          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+      }}
+    >
+      {/* add img divs */}
+      <div className={`${id === 6 && type === "home" && "flex justify-center"} h-full`}>
+        <div className="w-full h-full absolute">
+          {img && (
+            <img
+              src={img}
+              alt={img}
+              className={cn(imgClassName, "object-cover object-center ")}
+            />
+          )}
+        </div>
+        <div
+          className={`absolute right-0 -bottom-5 ${id === 3 && "w-full opacity-80"
+            } `}
+        >
+          {spareImg && (
+            <img
+              src={spareImg}
+              alt={spareImg}
+              className="object-cover object-center w-full h-full"
+            />
+          )}
+        </div>
+        {id === 6 && (
+          // add background animation
+          <BackgroundGradientAnimation>
+            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
+          </BackgroundGradientAnimation>
+        )}
+        <div
+          className={cn(
+            titleClassName,
+            "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10"
+          )}
+        >
+          <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+            {description}
+          </div>
+          <div
+            className={`z-10 font-sans text-lg lg:text-3xl max-w-96 font-bold`}
+          >
+            {title}
+          </div>
+          {/* add social media buttons */}
+          {id === 2 && <div className="flex z-50 items-center md:gap-3 gap-6 absolute right-10 p-0">
+            {socialMedia.filter(info => info.id !== 2).map((info) => (
+              <a href={info.link} key={info.id} target="_blank">
+              <div
+                className="w-[4rem] h-[4rem] cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-10 rounded-lg border border-black-300"
+              >
+                  <img src={info.img} alt="icons" className="h-[3rem] w-[3rem]" />
+                </div>
+              </a>
+            ))}
+
+          </div>}
+          {/* for the github 3d globe */}
+          {id === 2 && <GridGlobe />}
+
+          {/* Tech stack list div */}
+          {id === 5 && (
+            <div className="flex gap-8 lg:gap-5 w-fit absolute -right-3 lg:-right-2" style={{
+              maskImage: `linear-gradient(to right, transparent, white 15%, white 100%)`
+            }}>
+              {/* tech stack lists */}
+              <InfiniteTechStack
+                items={leftLists}
+                direction="up"
+                speed="normal"
+              />
+              <InfiniteTechStack
+                items={rightLists}
+                direction="down"
+                speed="normal"
+              />
+            </div>
+            
+          )}
+         
+          {id === 3 && (
+            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-0 mx-10">
+              <IoArrowForwardOutline/>
+            </div>
+          )}
+          {id === 3 && (
+            <a href="/resume" target="_blank" className="absolute h-full w-full z-10"></a>
+          )}
+          {/* {id === 5 && (
+            <a href="/projects" className="absolute h-full w-full z-10"></a>
+          )} */}
+          {id === 6 && (
+            <div className="mt-5 relative">
+              {/* button border magic from tailwind css buttons  */}
+              <div
+                className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"
+                  }`}
+              >
+                <Lottie options={defaultOptions} height={200} width={400} />
+              </div>
+
+              <MagicButton
+                title={copied ? "Email is Copied!" : "Copy my email address"}
+                icon={<IoCopyOutline />}
+                position="left"
+                handleClick={handleCopy}
+                otherClasses="!bg-[#161A31]"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
