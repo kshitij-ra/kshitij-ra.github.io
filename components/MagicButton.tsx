@@ -37,5 +37,5 @@ const MagicButton = memo(
     );
   }
 );
-
+MagicButton.displayName = 'MagicButton';
 export default MagicButton;
