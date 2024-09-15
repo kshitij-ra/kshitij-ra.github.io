@@ -42,7 +42,6 @@ export const gridItems = [
   {
     id: 4,
     title: "Passion for development and innovation.",
-    // title: "Tech enthusiast with a passion for development.",
     description: "Driven by",
     className: "lg:col-span-2 md:col-span-3 md:row-span-1",
     imgClassName: "",
@@ -87,8 +86,8 @@ export const projects = [
     img: "/b1.svg",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
     className: "",
-    type: "project",
-    projectLink: ""
+    projectLink: "",
+    githubLink: "https://github.com/kshitij-ra/Waste-Classification-App"
   },
   {
     title: "VolumeValet - Volume Remote Control App",
@@ -99,8 +98,8 @@ export const projects = [
     img: "/b1.svg",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
     className: "",
-    type: "project",
-    projectLink: ""
+    projectLink: "",
+    githubLink:  "https://github.com/kshitij-ra/VolumeValet"
   },
   {
     title: "Coming Soon..",
@@ -108,8 +107,8 @@ export const projects = [
     img: "/b1.svg",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
     className: "",
-    type: "project",
-    projectLink: ""
+    projectLink: "",
+    githubLink:""
   },
   {
     title: "Coming Soon..",
@@ -117,8 +116,8 @@ export const projects = [
     img: "/b1.svg",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
     className: "",
-    type: "project",
-    projectLink: ""
+    projectLink: "",
+    githubLink:""
   },
 ];
 

@@ -26,7 +26,7 @@ const Grid = () => {
          bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
         />
       </div>
-      <BentoGrid className="w-full md:h-screen pt-32 pb-10">
+      <BentoGrid className="w-full md:h-screen md:min-h-[800px] pt-32 lg:pt-32 pb-10">
         {gridItems.map((item, i) => (
           <BentoGridItem
             id={item.id}

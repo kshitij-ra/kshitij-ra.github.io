@@ -3,6 +3,7 @@
 import { projects } from "@/data";
 import { Spotlight } from "./ui/Spotlight";
 import { ProjectGrid, ProjectItem } from "./ui/ProjectGrid";
+import GridGlobe from "./ui/GridGlobe";
 
 const RecentProjects = () => {
   return (
@@ -29,7 +30,8 @@ const RecentProjects = () => {
       </div>
       <h1 className="heading relative">A small selection of{" "}<span className="text-purple">my projects</span>
       </h1>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
+      <div className="flex flex-wrap items-center justify-center p-4 gap-16 pt-8">
+        {/* <GridGlobe/> */}
         
         <ProjectGrid className="w-full h-full pt-10">
           {projects.map((item, i) => (
@@ -39,9 +41,8 @@ const RecentProjects = () => {
               description={item.des}
               className={item.className}
               img={item.img}
-              // imgClassName={item.imgClassName}
-              // titleClassName={item.titleClassName}
-              // spareImg={item.spareImg}
+              githubLink={item.githubLink}
+              projectLink={item.projectLink}
             />
           ))}
         </ProjectGrid>

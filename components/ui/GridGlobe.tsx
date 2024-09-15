@@ -403,6 +403,7 @@ const GridGlobe = () => {
         </div>
       </div>
     </div>
+
   );
 };
 export default GridGlobe;

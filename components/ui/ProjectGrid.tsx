@@ -1,6 +1,8 @@
 import { IoLinkOutline, IoLogoGithub } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import MagicButton from "../MagicButton";
+import Image from "next/image";
+import { useCallback } from "react";
 
 export const ProjectGrid = ({
   className,
@@ -41,11 +43,16 @@ export const ProjectItem = ({
   githubLink?: string;
 }) => {
 
-  const handleClick = (url: string | undefined) => {
+  const openOnClick = useCallback((url: string | undefined) => {
     if (url) {
-      window.open(url, "_blank");
+      const absoluteUrl = url.startsWith("http://") || url.startsWith("https://") ? url : `https://${url}`;
+
+      console.log(absoluteUrl);
+      if (typeof window !== "undefined") {
+        window.open(absoluteUrl, "_blank");
+      }
     }
-  };
+  }, []);
 
   return (
     <div
@@ -54,22 +61,20 @@ export const ProjectItem = ({
         className
       )}
       style={{
-        background: "rgb(4,7,29)",
-        backgroundColor:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+        background: "rgba(4, 7, 29, 1)",
       }}
     >
       {/* Image Section */}
       <div className="col-span-3 md:col-span-1 md:w-max-[23rem] relative overflow-hidden rounded-3xl">
         {img && (
-          <img
-            src={img}
-            alt={img}
-            className={cn(
-              imgClassName,
-              "w-full h-full object-cover object-center rounded-3xl"
-            )}
-          />
+          <div className="min-h-[16rem] rounded-3xl">
+            <Image
+              src={img}
+              alt={img}
+              fill={true}
+              className="object-cover object-center"
+            />
+          </div>
         )}
       </div>
 
@@ -92,29 +97,25 @@ export const ProjectItem = ({
 
         {/* Link Buttons */}
         <div className="py-2 justify-center md:justify-start mt-5 gap-4 flex flex-col md:flex-row">
-          {!githubLink && (
-            <div>
-              <MagicButton
-                title="View on Github"
-                icon={<IoLogoGithub />}
-                position="left"
-                handleClick={() => handleClick(githubLink)}
-                otherClasses="!bg-[#161A31]"
-              />
-            </div>
+          {githubLink && (
+            <MagicButton
+              title="View on Github"
+              icon={<IoLogoGithub />}
+              position="left"
+              handleClick={() => openOnClick(githubLink)}
+              otherClasses="!bg-[#161A31]"
+            />
           )}
-          {!projectLink && (
-            <div>
-              <MagicButton
-                title="Project Link"
-                icon={<IoLinkOutline />}
-                position="left"
-                handleClick={() => handleClick(projectLink)}
-                otherClasses="!bg-[#161A31]"
-              />
-            </div>
+          {projectLink && (
+            <MagicButton
+              title="Project Link"
+              icon={<IoLinkOutline />}
+              position="left"
+              handleClick={() => openOnClick(projectLink)}
+              otherClasses="!bg-[#161A31]"
+            />
           )}
-          
+
         </div>
       </div>
     </div>
